@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreBluetooth
+import ColorSlider
 
 class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
@@ -15,14 +16,11 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     var mainPeripheral:CBPeripheral? = nil
     var mainCharacteristic:CBCharacteristic? = nil
     var parentView:MainViewController? = nil
-    let greenLEDCharUUID = CBUUID(string: "f0001112-0451-4000-b000-000000000000")
-    var greenLEDCharacteristic: CBCharacteristic?
     
     let BLEService = "DFB0"
     let BLECharacteristic = "DFB1"
-
-    @IBOutlet weak var receivedMessageText: UILabel!
     
+    @IBOutlet weak var changeColorSlider: UISlider!
     override func viewDidLoad() {
            super.viewDidLoad()
            // Do any additional setup after loading the view.
@@ -30,7 +28,84 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
         
         customiseNavigationBar()
 
+
        }
+    
+    @IBAction func TurnOffButton(_ sender: UIButton) {
+        let offValue: UInt8 = 254
+        changeColorSlider.value = Float(offValue)
+        changeColorSlider.thumbTintColor = UIColor.lightGray
+        changeColorSlider.minimumTrackTintColor = UIColor.lightGray
+        
+        
+    }
+    @IBAction func ColorSelected(_ sender: UIButton) {
+        var color: UInt8 = 255
+        switch sender.tag {
+        case 1:
+            color = 64
+            changeColorSlider.thumbTintColor = UIColor(red: 247/255, green: 224/255, blue: 22/255, alpha: 1)
+            changeColorSlider.minimumTrackTintColor = UIColor(red: 247/255, green: 224/255, blue: 22/255, alpha: 1)
+            
+        case 2:
+            color = 80
+            changeColorSlider.thumbTintColor = UIColor(red: 137/255, green: 215/255, blue: 55/255, alpha: 1)
+            changeColorSlider.minimumTrackTintColor = UIColor(red: 137/255, green: 215/255, blue: 55/255, alpha: 1)
+        case 3:
+            color = 96
+            changeColorSlider.thumbTintColor = UIColor.systemGreen
+            changeColorSlider.minimumTrackTintColor = UIColor.systemGreen
+        case 4:
+            color = 128
+            changeColorSlider.thumbTintColor = UIColor(red: 37/255, green: 215/255, blue: 172/255, alpha: 1)
+            changeColorSlider.minimumTrackTintColor = UIColor(red: 37/255, green: 215/255, blue: 172/255, alpha: 1)
+            
+        case 5:
+                color = 144
+                changeColorSlider.thumbTintColor = UIColor.systemTeal
+            changeColorSlider.minimumTrackTintColor = UIColor.systemTeal
+
+        case 6:
+                color = 160
+                changeColorSlider.thumbTintColor = UIColor.systemBlue
+                changeColorSlider.minimumTrackTintColor = UIColor.systemBlue
+        case 7:
+                color = 176
+            changeColorSlider.thumbTintColor = UIColor.systemIndigo
+                changeColorSlider.minimumTrackTintColor = UIColor.systemIndigo
+        case 8:
+                color = 192
+            changeColorSlider.thumbTintColor = UIColor.systemPurple
+            changeColorSlider.minimumTrackTintColor = UIColor.systemPurple
+        case 9:
+                color = 224
+            changeColorSlider.thumbTintColor = UIColor.systemPink
+            changeColorSlider.minimumTrackTintColor = UIColor.systemPink
+        case 10:
+                color = 0
+                changeColorSlider.thumbTintColor = UIColor.systemRed
+                changeColorSlider.minimumTrackTintColor = UIColor.systemRed
+        case 11:
+                color = 16
+            changeColorSlider.thumbTintColor = UIColor(red: 235/255, green: 102/255, blue: 20/255, alpha: 1)
+             changeColorSlider.minimumTrackTintColor = UIColor(red: 235/255, green: 102/255, blue: 20/255, alpha: 1)
+        case 12:
+                color = 32
+            changeColorSlider.thumbTintColor = UIColor.systemOrange
+                changeColorSlider.minimumTrackTintColor = UIColor.systemOrange
+        default:
+            print("...")
+        }
+        changeColorSlider.value = Float(color)
+        let dataData = Data(repeating: color, count: 1)
+        if (mainPeripheral != nil) {
+            print("sending...")
+            mainPeripheral?.writeValue(dataData, for: mainCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+            print(dataData)
+        } else {
+            print("haven't discovered device yet")
+        }
+    }
     
     @IBAction func SendButton(_ sender: UIButton) {
         let color: UInt8 = 0xff
@@ -63,17 +138,19 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     func customiseNavigationBar () {
         
         self.navigationItem.rightBarButtonItem = nil
+        self.navigationController?.navigationBar.barTintColor = UIColor.systemGray6
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         let rightButton = UIButton()
         
         if (mainPeripheral == nil) {
             rightButton.setTitle("Scan", for: [])
-            rightButton.setTitleColor(UIColor.blue, for: [])
+            rightButton.setTitleColor(UIColor.white, for: [])
             rightButton.frame = CGRect(origin: CGPoint(x: 0,y :0), size: CGSize(width: 60, height: 30))
             rightButton.addTarget(self, action: #selector(self.scanButtonPressed), for: .touchUpInside)
         } else {
             rightButton.setTitle("Disconnect", for: [])
-            rightButton.setTitleColor(UIColor.blue, for: [])
+            rightButton.setTitleColor(UIColor.white, for: [])
             rightButton.frame = CGRect(origin: CGPoint(x: 0,y :0), size: CGSize(width: 100, height: 30))
             rightButton.addTarget(self, action: #selector(self.disconnectButtonPressed), for: .touchUpInside)
         }
@@ -215,14 +292,10 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
                 if(characteristic.value != nil) {
                     let stringValue = String(data: characteristic.value!, encoding: String.Encoding.utf8)!
                 print("**\(stringValue)**")
-                    //receivedMessageText.text = stringValue
                 }
             }
             
             
         }
-        
-    
 }
 
-//********************************************
