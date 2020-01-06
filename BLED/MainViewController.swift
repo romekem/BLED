@@ -21,6 +21,7 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     let BLECharacteristic = "DFB1"
     
     @IBOutlet weak var changeColorSlider: UISlider!
+    
     override func viewDidLoad() {
            super.viewDidLoad()
            // Do any additional setup after loading the view.
@@ -31,109 +32,62 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
 
        }
     
+    // MARK: - Button Methods
+    
     @IBAction func TurnOffButton(_ sender: UIButton) {
         let offValue: UInt8 = 254
-        changeColorSlider.value = Float(offValue)
-        changeColorSlider.thumbTintColor = UIColor.lightGray
-        changeColorSlider.minimumTrackTintColor = UIColor.lightGray
-        
-        
+        sliderColor(color: offValue)
+        let dataData = Data(repeating: offValue, count: 1)
+       sendData(data: dataData)
     }
     @IBAction func ColorSelected(_ sender: UIButton) {
         var color: UInt8 = 255
         switch sender.tag {
         case 1:
-            color = 64
-            changeColorSlider.thumbTintColor = UIColor(red: 247/255, green: 224/255, blue: 22/255, alpha: 1)
-            changeColorSlider.minimumTrackTintColor = UIColor(red: 247/255, green: 224/255, blue: 22/255, alpha: 1)
-            
+            color = 32
         case 2:
-            color = 80
-            changeColorSlider.thumbTintColor = UIColor(red: 137/255, green: 215/255, blue: 55/255, alpha: 1)
-            changeColorSlider.minimumTrackTintColor = UIColor(red: 137/255, green: 215/255, blue: 55/255, alpha: 1)
+            color = 70
         case 3:
-            color = 96
-            changeColorSlider.thumbTintColor = UIColor.systemGreen
-            changeColorSlider.minimumTrackTintColor = UIColor.systemGreen
+            color = 80
         case 4:
-            color = 128
-            changeColorSlider.thumbTintColor = UIColor(red: 37/255, green: 215/255, blue: 172/255, alpha: 1)
-            changeColorSlider.minimumTrackTintColor = UIColor(red: 37/255, green: 215/255, blue: 172/255, alpha: 1)
-            
+            color = 96
         case 5:
-                color = 144
-                changeColorSlider.thumbTintColor = UIColor.systemTeal
-            changeColorSlider.minimumTrackTintColor = UIColor.systemTeal
-
+                color = 118
         case 6:
-                color = 160
-                changeColorSlider.thumbTintColor = UIColor.systemBlue
-                changeColorSlider.minimumTrackTintColor = UIColor.systemBlue
+                color = 134
         case 7:
                 color = 176
-            changeColorSlider.thumbTintColor = UIColor.systemIndigo
-                changeColorSlider.minimumTrackTintColor = UIColor.systemIndigo
         case 8:
                 color = 192
-            changeColorSlider.thumbTintColor = UIColor.systemPurple
-            changeColorSlider.minimumTrackTintColor = UIColor.systemPurple
         case 9:
-                color = 224
-            changeColorSlider.thumbTintColor = UIColor.systemPink
-            changeColorSlider.minimumTrackTintColor = UIColor.systemPink
+                color = 216
         case 10:
                 color = 0
-                changeColorSlider.thumbTintColor = UIColor.systemRed
-                changeColorSlider.minimumTrackTintColor = UIColor.systemRed
         case 11:
                 color = 16
-            changeColorSlider.thumbTintColor = UIColor(red: 235/255, green: 102/255, blue: 20/255, alpha: 1)
-             changeColorSlider.minimumTrackTintColor = UIColor(red: 235/255, green: 102/255, blue: 20/255, alpha: 1)
         case 12:
-                color = 32
-            changeColorSlider.thumbTintColor = UIColor.systemOrange
-                changeColorSlider.minimumTrackTintColor = UIColor.systemOrange
+                color = 24
         default:
             print("...")
         }
-        changeColorSlider.value = Float(color)
+        sliderColor(color: color)
         let dataData = Data(repeating: color, count: 1)
-        if (mainPeripheral != nil) {
-            print("sending...")
-            mainPeripheral?.writeValue(dataData, for: mainCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
-            print(dataData)
-        } else {
-            print("haven't discovered device yet")
-        }
+        sendData(data: dataData)
     }
     
     @IBAction func SendButton(_ sender: UIButton) {
-        let color: UInt8 = 0xff
+        let color: UInt8 = 255
         let dataData = Data(repeating: color, count: 1)
-//        let colorToString = String(color)
-//        let dataToSend = colorToString.data(using: String.Encoding.utf8)
-        
-        if (mainPeripheral != nil) {
-            print("sending...")
-            mainPeripheral?.writeValue(dataData, for: mainCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
-            print(dataData)
-        } else {
-            print("haven't discovered device yet")
-        }
+        sendData(data: dataData)
     }
     
     @IBAction func ColorSlider(_ sender: UISlider) {
         let color = UInt8(sender.value)
+        sliderColor(color: color)
         let dataData = Data(repeating: color, count: 1)
-        
-        if (mainPeripheral != nil) {
-            print("sending...")
-            mainPeripheral?.writeValue(dataData, for: mainCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
-            print(dataData)
-        } else {
-            print("haven't discovered device yet")
-        }
+        sendData(data: dataData)
     }
+    // MARK: - functions
     
     func customiseNavigationBar () {
         
@@ -150,7 +104,7 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
             rightButton.addTarget(self, action: #selector(self.scanButtonPressed), for: .touchUpInside)
         } else {
             rightButton.setTitle("Disconnect", for: [])
-            rightButton.setTitleColor(UIColor.white, for: [])
+            rightButton.setTitleColor(UIColor.green, for: [])
             rightButton.frame = CGRect(origin: CGPoint(x: 0,y :0), size: CGSize(width: 100, height: 30))
             rightButton.addTarget(self, action: #selector(self.disconnectButtonPressed), for: .touchUpInside)
         }
@@ -175,7 +129,65 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
         
     }
     
-    // MARK: - Button Methods
+    func sliderColor (color: UInt8) {
+        changeColorSlider.value = Float(color)
+        switch color {
+        case 0...7:
+            changeColorSlider.thumbTintColor = UIColor.systemRed
+            changeColorSlider.minimumTrackTintColor = UIColor.systemRed
+        case 8...19:
+            changeColorSlider.thumbTintColor = UIColor(red: 235/255, green: 102/255, blue: 20/255, alpha: 1)
+            changeColorSlider.minimumTrackTintColor = UIColor(red: 235/255, green: 102/255, blue: 20/255, alpha: 1)
+        case 20...29:
+            changeColorSlider.thumbTintColor = UIColor.systemOrange
+            changeColorSlider.minimumTrackTintColor = UIColor.systemOrange
+        case 30...49:
+            changeColorSlider.thumbTintColor = UIColor(red: 247/255, green: 224/255, blue: 22/255, alpha: 1)
+            changeColorSlider.minimumTrackTintColor = UIColor(red: 247/255, green: 224/255, blue: 22/255, alpha: 1)
+        case 50...75:
+            changeColorSlider.thumbTintColor = UIColor(red: 137/255, green: 215/255, blue: 55/255, alpha: 1)
+            changeColorSlider.minimumTrackTintColor = UIColor(red: 137/255, green: 215/255, blue: 55/255, alpha: 1)
+        case 76...89:
+            changeColorSlider.thumbTintColor = UIColor.systemGreen
+            changeColorSlider.minimumTrackTintColor = UIColor.systemGreen
+        case 90...109:
+            changeColorSlider.thumbTintColor = UIColor(red: 37/255, green: 215/255, blue: 172/255, alpha: 1)
+            changeColorSlider.minimumTrackTintColor = UIColor(red: 37/255, green: 215/255, blue: 172/255, alpha: 1)
+        case 110...124:
+            changeColorSlider.thumbTintColor = UIColor.systemTeal
+            changeColorSlider.minimumTrackTintColor = UIColor.systemTeal
+        case 125...159:
+                changeColorSlider.thumbTintColor = UIColor.systemBlue
+                changeColorSlider.minimumTrackTintColor = UIColor.systemBlue
+        case 160...183:
+            changeColorSlider.thumbTintColor = UIColor.systemIndigo
+            changeColorSlider.minimumTrackTintColor = UIColor.systemIndigo
+        case 184...204:
+            changeColorSlider.thumbTintColor = UIColor.systemPurple
+            changeColorSlider.minimumTrackTintColor = UIColor.systemPurple
+        case 205...224:
+            changeColorSlider.thumbTintColor = UIColor.systemPink
+            changeColorSlider.minimumTrackTintColor = UIColor.systemPink
+        case 225...253:
+            changeColorSlider.thumbTintColor = UIColor.systemRed
+            changeColorSlider.minimumTrackTintColor = UIColor.systemRed
+        case 254...255:
+            changeColorSlider.thumbTintColor = UIColor.lightGray
+            changeColorSlider.minimumTrackTintColor = UIColor.lightGray
+        default:
+            print("...")
+        }
+    }
+    
+    func sendData(data: Data){
+        if (mainPeripheral != nil) {
+            print("sending...")
+            mainPeripheral?.writeValue(data, for: mainCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+        } else {
+            print("haven't discovered device yet")
+        }
+    }
+
     @objc func scanButtonPressed() {
         performSegue(withIdentifier: "scan-segue", sender: nil)
     }
