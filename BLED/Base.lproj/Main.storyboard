@@ -260,7 +260,7 @@
                                     <constraint firstItem="HtK-38-7Nd" firstAttribute="centerX" secondItem="DEe-9V-wDb" secondAttribute="centerX" constant="-57.5" id="xl6-TF-OXk"/>
                                 </constraints>
                             </view>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="254" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="4rB-Gi-M2t">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="254" minValue="0.0" maxValue="254" translatesAutoresizingMaskIntoConstraints="NO" id="4rB-Gi-M2t">
                                 <rect key="frame" x="14" y="521" width="347" height="31"/>
                                 <color key="minimumTrackTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="thumbTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -295,6 +295,7 @@
                     <navigationItem key="navigationItem" title="BLED" id="vwC-nQ-pvP"/>
                     <connections>
                         <outlet property="changeColorSlider" destination="4rB-Gi-M2t" id="ZSC-gN-Rle"/>
+                        <outlet property="modeButton" destination="eB5-HP-q6W" id="ey7-pC-o1k"/>
                         <segue destination="TSf-NA-Ej9" kind="show" identifier="scan-segue" id="3Mq-5K-MBJ"/>
                     </connections>
                 </viewController>
@@ -318,6 +319,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.25098039220000001" green="0.31372549020000001" blue="0.3921568627" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </tableViewCell>
                         </prototypes>
                         <connections>

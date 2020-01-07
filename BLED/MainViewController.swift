@@ -20,16 +20,17 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     let BLEService = "DFB0"
     let BLECharacteristic = "DFB1"
     
+    var lightMode:Int? = nil
+    
     @IBOutlet weak var changeColorSlider: UISlider!
+    @IBOutlet weak var modeButton: UIButton!
     
     override func viewDidLoad() {
            super.viewDidLoad()
            // Do any additional setup after loading the view.
         manager = CBCentralManager(delegate: self, queue: nil);
-        
+        buttonMode()
         customiseNavigationBar()
-
-
        }
     
     // MARK: - Button Methods
@@ -37,8 +38,7 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     @IBAction func TurnOffButton(_ sender: UIButton) {
         let offValue: UInt8 = 254
         sliderColor(color: offValue)
-        let dataData = Data(repeating: offValue, count: 1)
-       sendData(data: dataData)
+       sendData(data: offValue)
     }
     @IBAction func ColorSelected(_ sender: UIButton) {
         var color: UInt8 = 255
@@ -52,40 +52,38 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
         case 4:
             color = 96
         case 5:
-                color = 118
+            color = 118
         case 6:
-                color = 134
+            color = 134
         case 7:
-                color = 176
+            color = 176
         case 8:
-                color = 192
+            color = 192
         case 9:
-                color = 216
+            color = 216
         case 10:
-                color = 0
+            color = 0
         case 11:
-                color = 16
+            color = 16
         case 12:
-                color = 24
+            color = 24
         default:
             print("...")
         }
         sliderColor(color: color)
-        let dataData = Data(repeating: color, count: 1)
-        sendData(data: dataData)
+        sendData(data: color)
     }
     
     @IBAction func SendButton(_ sender: UIButton) {
         let color: UInt8 = 255
-        let dataData = Data(repeating: color, count: 1)
-        sendData(data: dataData)
+        sendData(data: color)
     }
     
     @IBAction func ColorSlider(_ sender: UISlider) {
         let color = UInt8(sender.value)
         sliderColor(color: color)
-        let dataData = Data(repeating: color, count: 1)
-        sendData(data: dataData)
+        sendData(data: color)
+
     }
     // MARK: - functions
     
@@ -125,6 +123,28 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
             scanController.manager = manager
             scanController.parentView = self
             
+        }
+        
+    }
+    
+    func buttonMode(){
+        if lightMode != nil {
+            var modeValue = lightMode!%10
+            
+            switch modeValue {
+            case 1:
+                modeButton.setTitle("Light Off", for: .normal)
+            case 2:
+                modeButton.setTitle("Mode 1", for: .normal)
+            case 3:
+                modeButton.setTitle("Mode 2", for: .normal)
+            case 4:
+                modeButton.setTitle("Mode 3", for: .normal)
+            default:
+                print("mode")
+            }
+        } else {
+            modeButton.setTitle("ON", for: .normal)
         }
         
     }
@@ -171,7 +191,7 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
         case 225...253:
             changeColorSlider.thumbTintColor = UIColor.systemRed
             changeColorSlider.minimumTrackTintColor = UIColor.systemRed
-        case 254...255:
+        case 254:
             changeColorSlider.thumbTintColor = UIColor.lightGray
             changeColorSlider.minimumTrackTintColor = UIColor.lightGray
         default:
@@ -179,10 +199,11 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
         }
     }
     
-    func sendData(data: Data){
+    func sendData(data: UInt8){
+        let dataData = Data(repeating: data, count: 1)
         if (mainPeripheral != nil) {
             print("sending...")
-            mainPeripheral?.writeValue(data, for: mainCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
+            mainPeripheral?.writeValue(dataData, for: mainCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
         } else {
             print("haven't discovered device yet")
         }
@@ -276,6 +297,7 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
                         //Set Notify is useful to read incoming data async
                         peripheral.setNotifyValue(true, for: characteristic)
                         print("Found Bluno Data Characteristic")
+                        sendData(data: 255)
                     }
                     
                 }
@@ -303,7 +325,10 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
                 //data recieved
                 if(characteristic.value != nil) {
                     let stringValue = String(data: characteristic.value!, encoding: String.Encoding.utf8)!
+                    let intValue = Int(stringValue)
                 print("**\(stringValue)**")
+                    lightMode = intValue
+                    buttonMode()
                 }
             }
             

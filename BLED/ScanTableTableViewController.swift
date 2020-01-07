@@ -17,12 +17,8 @@ class ScanTableTableViewController: UITableViewController, CBCentralManagerDeleg
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        self.tableView.backgroundColor = UIColor(red: 64/255, green: 80/255, blue: 100/255, alpha: 1)
     }
     
     override func viewDidAppear(_ animated: Bool) {
