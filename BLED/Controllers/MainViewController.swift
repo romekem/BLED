@@ -8,7 +8,6 @@
 
 import UIKit
 import CoreBluetooth
-import ColorSlider
 
 class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
@@ -21,6 +20,8 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     let BLECharacteristic = "DFB1"
     
     var lightMode:Int? = nil
+    
+    var colorUI: Colors = Colors()
     
     @IBOutlet weak var changeColorSlider: UISlider!
     @IBOutlet weak var modeButton: UIButton!
@@ -41,37 +42,39 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
        sendData(data: offValue)
     }
     @IBAction func ColorSelected(_ sender: UIButton) {
-        var color: UInt8 = 255
-        switch sender.tag {
-        case 1:
-            color = 32
-        case 2:
-            color = 70
-        case 3:
-            color = 80
-        case 4:
-            color = 96
-        case 5:
-            color = 118
-        case 6:
-            color = 134
-        case 7:
-            color = 176
-        case 8:
-            color = 192
-        case 9:
-            color = 216
-        case 10:
-            color = 0
-        case 11:
-            color = 16
-        case 12:
-            color = 24
-        default:
-            print("...")
-        }
+        let color = colorUI.colorValue(tagValue: sender.tag)
+//        var color: UInt8 = 255
+//        switch sender.tag {
+//        case 1:
+//            color = 32
+//        case 2:
+//            color = 70
+//        case 3:
+//            color = 80
+//        case 4:
+//            color = 96
+//        case 5:
+//            color = 118
+//        case 6:
+//            color = 134
+//        case 7:
+//            color = 176
+//        case 8:
+//            color = 192
+//        case 9:
+//            color = 216
+//        case 10:
+//            color = 0
+//        case 11:
+//            color = 16
+//        case 12:
+//            color = 24
+//        default:
+//            print("...")
+//        }
         sliderColor(color: color)
         sendData(data: color)
+        print(color)
     }
     
     @IBAction func SendButton(_ sender: UIButton) {
@@ -151,52 +154,11 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     
     func sliderColor (color: UInt8) {
         changeColorSlider.value = Float(color)
-        switch color {
-        case 0...7:
-            changeColorSlider.thumbTintColor = UIColor.systemRed
-            changeColorSlider.minimumTrackTintColor = UIColor.systemRed
-        case 8...19:
-            changeColorSlider.thumbTintColor = UIColor(red: 235/255, green: 102/255, blue: 20/255, alpha: 1)
-            changeColorSlider.minimumTrackTintColor = UIColor(red: 235/255, green: 102/255, blue: 20/255, alpha: 1)
-        case 20...29:
-            changeColorSlider.thumbTintColor = UIColor.systemOrange
-            changeColorSlider.minimumTrackTintColor = UIColor.systemOrange
-        case 30...49:
-            changeColorSlider.thumbTintColor = UIColor(red: 247/255, green: 224/255, blue: 22/255, alpha: 1)
-            changeColorSlider.minimumTrackTintColor = UIColor(red: 247/255, green: 224/255, blue: 22/255, alpha: 1)
-        case 50...75:
-            changeColorSlider.thumbTintColor = UIColor(red: 137/255, green: 215/255, blue: 55/255, alpha: 1)
-            changeColorSlider.minimumTrackTintColor = UIColor(red: 137/255, green: 215/255, blue: 55/255, alpha: 1)
-        case 76...89:
-            changeColorSlider.thumbTintColor = UIColor.systemGreen
-            changeColorSlider.minimumTrackTintColor = UIColor.systemGreen
-        case 90...109:
-            changeColorSlider.thumbTintColor = UIColor(red: 37/255, green: 215/255, blue: 172/255, alpha: 1)
-            changeColorSlider.minimumTrackTintColor = UIColor(red: 37/255, green: 215/255, blue: 172/255, alpha: 1)
-        case 110...124:
-            changeColorSlider.thumbTintColor = UIColor.systemTeal
-            changeColorSlider.minimumTrackTintColor = UIColor.systemTeal
-        case 125...159:
-                changeColorSlider.thumbTintColor = UIColor.systemBlue
-                changeColorSlider.minimumTrackTintColor = UIColor.systemBlue
-        case 160...183:
-            changeColorSlider.thumbTintColor = UIColor.systemIndigo
-            changeColorSlider.minimumTrackTintColor = UIColor.systemIndigo
-        case 184...204:
-            changeColorSlider.thumbTintColor = UIColor.systemPurple
-            changeColorSlider.minimumTrackTintColor = UIColor.systemPurple
-        case 205...224:
-            changeColorSlider.thumbTintColor = UIColor.systemPink
-            changeColorSlider.minimumTrackTintColor = UIColor.systemPink
-        case 225...253:
-            changeColorSlider.thumbTintColor = UIColor.systemRed
-            changeColorSlider.minimumTrackTintColor = UIColor.systemRed
-        case 254:
-            changeColorSlider.thumbTintColor = UIColor.lightGray
-            changeColorSlider.minimumTrackTintColor = UIColor.lightGray
-        default:
-            print("...")
-        }
+        let actualColor = colorUI.getColor(color: color)
+        changeColorSlider.thumbTintColor = actualColor
+        changeColorSlider.minimumTrackTintColor = actualColor
+
+
     }
     
     func sendData(data: UInt8){

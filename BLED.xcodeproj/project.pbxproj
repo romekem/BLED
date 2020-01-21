@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,11 +15,11 @@
 		302C633023A16E28009AD840 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 302C632E23A16E28009AD840 /* LaunchScreen.storyboard */; };
 		302C633923A16FD6009AD840 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302C633823A16FD6009AD840 /* CoreBluetooth.framework */; };
 		302C633D23A17294009AD840 /* ScanTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C633C23A17294009AD840 /* ScanTableTableViewController.swift */; };
-		65F19EE42041A61CB7A22BE2 /* Pods_BLED.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54EBE15720B5725761A87533 /* Pods_BLED.framework */; };
+		30A182E823CBB3E10074C428 /* LightColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A182E723CBB3E10074C428 /* LightColor.swift */; };
+		30A182EA23CBB43A0074C428 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A182E923CBB43A0074C428 /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		143AD905AC47CB7253821325 /* Pods-BLED.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLED.release.xcconfig"; path = "Target Support Files/Pods-BLED/Pods-BLED.release.xcconfig"; sourceTree = "<group>"; };
 		302C632023A16E1F009AD840 /* BLED.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLED.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		302C632323A16E1F009AD840 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		302C632523A16E1F009AD840 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -30,8 +30,8 @@
 		302C633123A16E28009AD840 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		302C633823A16FD6009AD840 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		302C633C23A17294009AD840 /* ScanTableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanTableTableViewController.swift; sourceTree = "<group>"; };
-		54EBE15720B5725761A87533 /* Pods_BLED.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLED.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		79712D7BDF7193E15D462999 /* Pods-BLED.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLED.debug.xcconfig"; path = "Target Support Files/Pods-BLED/Pods-BLED.debug.xcconfig"; sourceTree = "<group>"; };
+		30A182E723CBB3E10074C428 /* LightColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightColor.swift; sourceTree = "<group>"; };
+		30A182E923CBB43A0074C428 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +40,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				302C633923A16FD6009AD840 /* CoreBluetooth.framework in Frameworks */,
-				65F19EE42041A61CB7A22BE2 /* Pods_BLED.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,12 +69,12 @@
 			children = (
 				302C632323A16E1F009AD840 /* AppDelegate.swift */,
 				302C632523A16E1F009AD840 /* SceneDelegate.swift */,
-				302C632723A16E1F009AD840 /* MainViewController.swift */,
-				302C632923A16E1F009AD840 /* Main.storyboard */,
+				30A182E423CBB36B0074C428 /* Models */,
+				30A182E523CBB3780074C428 /* Views */,
+				30A182E623CBB37F0074C428 /* Controllers */,
 				302C632C23A16E28009AD840 /* Assets.xcassets */,
 				302C632E23A16E28009AD840 /* LaunchScreen.storyboard */,
 				302C633123A16E28009AD840 /* Info.plist */,
-				302C633C23A17294009AD840 /* ScanTableTableViewController.swift */,
 			);
 			path = BLED;
 			sourceTree = "<group>";
@@ -84,16 +83,39 @@
 			isa = PBXGroup;
 			children = (
 				302C633823A16FD6009AD840 /* CoreBluetooth.framework */,
-				54EBE15720B5725761A87533 /* Pods_BLED.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		30A182E423CBB36B0074C428 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				30A182E723CBB3E10074C428 /* LightColor.swift */,
+				30A182E923CBB43A0074C428 /* Colors.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		30A182E523CBB3780074C428 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				302C632923A16E1F009AD840 /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		30A182E623CBB37F0074C428 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				302C632723A16E1F009AD840 /* MainViewController.swift */,
+				302C633C23A17294009AD840 /* ScanTableTableViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		D12392BA19C9646F51D04261 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				79712D7BDF7193E15D462999 /* Pods-BLED.debug.xcconfig */,
-				143AD905AC47CB7253821325 /* Pods-BLED.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -105,11 +127,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 302C633423A16E28009AD840 /* Build configuration list for PBXNativeTarget "BLED" */;
 			buildPhases = (
-				D118A34E10C8FDC7AEA4A31A /* [CP] Check Pods Manifest.lock */,
 				302C631C23A16E1E009AD840 /* Sources */,
 				302C631D23A16E1E009AD840 /* Frameworks */,
 				302C631E23A16E1E009AD840 /* Resources */,
-				76D88AAFBA407C5C17A36E94 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -166,57 +186,17 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		76D88AAFBA407C5C17A36E94 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BLED/Pods-BLED-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BLED/Pods-BLED-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BLED/Pods-BLED-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		D118A34E10C8FDC7AEA4A31A /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-BLED-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		302C631C23A16E1E009AD840 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				302C632823A16E1F009AD840 /* MainViewController.swift in Sources */,
+				30A182EA23CBB43A0074C428 /* Colors.swift in Sources */,
 				302C633D23A17294009AD840 /* ScanTableTableViewController.swift in Sources */,
 				302C632423A16E1F009AD840 /* AppDelegate.swift in Sources */,
 				302C632623A16E1F009AD840 /* SceneDelegate.swift in Sources */,
+				30A182E823CBB3E10074C428 /* LightColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,7 +338,6 @@
 		};
 		302C633523A16E28009AD840 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79712D7BDF7193E15D462999 /* Pods-BLED.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -378,7 +357,6 @@
 		};
 		302C633623A16E28009AD840 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 143AD905AC47CB7253821325 /* Pods-BLED.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
