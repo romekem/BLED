@@ -22,6 +22,17 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     var lightMode:Int? = nil
     
     var colorUI: Colors = Colors()
+    var modeSelected = 0
+    
+    var mode: Int = 0 {
+        didSet {
+            if mode != oldValue {
+                modeSelected = mode
+                buttonMode()
+                print("zastapione!!!!!!!!!!!")
+            }
+        }
+    }
     
     @IBOutlet weak var changeColorSlider: UISlider!
     @IBOutlet weak var modeButton: UIButton!
@@ -43,35 +54,7 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     }
     @IBAction func ColorSelected(_ sender: UIButton) {
         let color = colorUI.colorValue(tagValue: sender.tag)
-//        var color: UInt8 = 255
-//        switch sender.tag {
-//        case 1:
-//            color = 32
-//        case 2:
-//            color = 70
-//        case 3:
-//            color = 80
-//        case 4:
-//            color = 96
-//        case 5:
-//            color = 118
-//        case 6:
-//            color = 134
-//        case 7:
-//            color = 176
-//        case 8:
-//            color = 192
-//        case 9:
-//            color = 216
-//        case 10:
-//            color = 0
-//        case 11:
-//            color = 16
-//        case 12:
-//            color = 24
-//        default:
-//            print("...")
-//        }
+
         sliderColor(color: color)
         sendData(data: color)
         print(color)
@@ -127,22 +110,21 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
             scanController.parentView = self
             
         }
-        
     }
     
     func buttonMode(){
         if lightMode != nil {
-            var modeValue = lightMode!%10
+            let modeValue = lightMode!
             
             switch modeValue {
             case 1:
                 modeButton.setTitle("Light Off", for: .normal)
             case 2:
-                modeButton.setTitle("Mode 1", for: .normal)
+                modeButton.setTitle("Color mode", for: .normal)
             case 3:
-                modeButton.setTitle("Mode 2", for: .normal)
+                modeButton.setTitle("Yellow mode", for: .normal)
             case 4:
-                modeButton.setTitle("Mode 3", for: .normal)
+                modeButton.setTitle("White mode", for: .normal)
             default:
                 print("mode")
             }
@@ -153,11 +135,24 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     }
     
     func sliderColor (color: UInt8) {
+        var actualColor: UIColor? = nil
+        
+        if mode == 1 {
+            actualColor = UIColor.gray
+        } else if mode == 2 {
+            actualColor = colorUI.getColor(color: color)
+            print("gogog")
+        } else if mode == 3 {
+            actualColor = UIColor.systemYellow
+            print("haha")
+        } else if mode == 4 {
+            actualColor = UIColor.white
+            print("trzeci")
+        }
         changeColorSlider.value = Float(color)
-        let actualColor = colorUI.getColor(color: color)
+        
         changeColorSlider.thumbTintColor = actualColor
         changeColorSlider.minimumTrackTintColor = actualColor
-
 
     }
     
@@ -288,13 +283,13 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
                 if(characteristic.value != nil) {
                     let stringValue = String(data: characteristic.value!, encoding: String.Encoding.utf8)!
                     let intValue = Int(stringValue)
-                print("**\(stringValue)**")
-                    lightMode = intValue
-                    buttonMode()
+                    print("**\(intValue!)**")
+                    lightMode = intValue!%10
+                    mode = lightMode!
+                    
                 }
             }
-            
-            
+        
         }
 }
 

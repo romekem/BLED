@@ -9,7 +9,7 @@
 import UIKit
 
 struct LightColor {
-    let value: UInt8
+    var mode: Int
     var color: UIColor
 }
 
