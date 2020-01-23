@@ -19,17 +19,15 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     let BLEService = "DFB0"
     let BLECharacteristic = "DFB1"
     
-    var lightMode:Int? = nil
+//    var lightMode:Int? = nil
     
     var colorUI: Colors = Colors()
-    var modeSelected = 0
     
-    var mode: Int = 0 {
+    var mode: Int? {
         didSet {
             if mode != oldValue {
-                modeSelected = mode
-                buttonMode()
-                print("zastapione!!!!!!!!!!!")
+                sliderColor()
+                colorUI.mode = mode!
             }
         }
     }
@@ -49,25 +47,32 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     
     @IBAction func TurnOffButton(_ sender: UIButton) {
         let offValue: UInt8 = 254
-        sliderColor(color: offValue)
-       sendData(data: offValue)
+//        colorUI.lightColor = offValue
+        sliderColor()
+        sendData(data: offValue)
     }
     @IBAction func ColorSelected(_ sender: UIButton) {
         let color = colorUI.colorValue(tagValue: sender.tag)
-
-        sliderColor(color: color)
+        
+        colorUI.lightColor = color
+        sliderColor()
         sendData(data: color)
         print(color)
     }
     
     @IBAction func SendButton(_ sender: UIButton) {
-        let color: UInt8 = 255
-        sendData(data: color)
+        let modeChange: UInt8 = 255
+        sendData(data: modeChange)
+        if colorUI.lightColor != nil {
+            sendData(data: colorUI.lightColor!)
+        }
+        
     }
     
     @IBAction func ColorSlider(_ sender: UISlider) {
         let color = UInt8(sender.value)
-        sliderColor(color: color)
+        colorUI.lightColor = color
+        sliderColor()
         sendData(data: color)
 
     }
@@ -113,8 +118,8 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     }
     
     func buttonMode(){
-        if lightMode != nil {
-            let modeValue = lightMode!
+        if mode != nil {
+            let modeValue = mode!
             
             switch modeValue {
             case 1:
@@ -134,26 +139,27 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
         
     }
     
-    func sliderColor (color: UInt8) {
+    func sliderColor () {
         var actualColor: UIColor? = nil
         
-        if mode == 1 {
-            actualColor = UIColor.gray
-        } else if mode == 2 {
-            actualColor = colorUI.getColor(color: color)
-            print("gogog")
-        } else if mode == 3 {
-            actualColor = UIColor.systemYellow
-            print("haha")
-        } else if mode == 4 {
-            actualColor = UIColor.white
-            print("trzeci")
+        if let color = colorUI.lightColor {
+            if mode == 1 {
+                actualColor = UIColor.gray
+            } else if mode == 2 {
+                actualColor = colorUI.getColor(color: color)
+                print("gogog")
+            } else if mode == 3 {
+                actualColor = UIColor.systemYellow
+                print("haha")
+            } else if mode == 4 {
+                actualColor = UIColor.white
+                print("trzeci")
+            }
+            changeColorSlider.value = Float(color)
+            changeColorSlider.thumbTintColor = actualColor
+            changeColorSlider.minimumTrackTintColor = actualColor
         }
-        changeColorSlider.value = Float(color)
         
-        changeColorSlider.thumbTintColor = actualColor
-        changeColorSlider.minimumTrackTintColor = actualColor
-
     }
     
     func sendData(data: UInt8){
@@ -254,7 +260,10 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
                         //Set Notify is useful to read incoming data async
                         peripheral.setNotifyValue(true, for: characteristic)
                         print("Found Bluno Data Characteristic")
-                        sendData(data: 255)
+                        if colorUI.lightColor == nil {
+                            sendData(data: 255)
+                        }
+                        
                     }
                     
                 }
@@ -284,8 +293,8 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
                     let stringValue = String(data: characteristic.value!, encoding: String.Encoding.utf8)!
                     let intValue = Int(stringValue)
                     print("**\(intValue!)**")
-                    lightMode = intValue!%10
-                    mode = lightMode!
+                    mode = intValue!%10
+                    buttonMode()
                     
                 }
             }
