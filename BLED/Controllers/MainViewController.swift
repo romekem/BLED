@@ -63,6 +63,7 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     @IBAction func SendButton(_ sender: UIButton) {
         let modeChange: UInt8 = 255
         sendData(data: modeChange)
+        sendData(data: 253)
         if colorUI.lightColor != nil {
             sendData(data: colorUI.lightColor!)
         }
@@ -260,12 +261,13 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
                         //Set Notify is useful to read incoming data async
                         peripheral.setNotifyValue(true, for: characteristic)
                         print("Found Bluno Data Characteristic")
-                        if colorUI.lightColor == nil {
-                            sendData(data: 255)
-                        }
+//                        if colorUI.lightColor == nil {
+//                            sendData(data: 253)
+//                        }
+                        sendData(data: 253)
                         
                     }
-                    
+                     
                 }
                 
             }
@@ -290,10 +292,15 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
             } else if (characteristic.uuid.uuidString == BLECharacteristic) {
                 //data recieved
                 if(characteristic.value != nil) {
+                    print(characteristic.value)
                     let stringValue = String(data: characteristic.value!, encoding: String.Encoding.utf8)!
                     let intValue = Int(stringValue)
-                    print("**\(intValue!)**")
-                    mode = intValue!%10
+                    if stringValue.count < 4 {
+                        mode = intValue!%10
+                    }
+                    
+                    print("**\(stringValue)**")
+                    
                     buttonMode()
                     
                 }
