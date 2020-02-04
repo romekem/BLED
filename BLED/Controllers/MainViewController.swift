@@ -19,8 +19,6 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     let BLEService = "DFB0"
     let BLECharacteristic = "DFB1"
     
-//    var lightMode:Int? = nil
-    
     var colorUI: Colors = Colors()
     
     var mode: Int? {
@@ -47,7 +45,6 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     
     @IBAction func TurnOffButton(_ sender: UIButton) {
         let offValue: UInt8 = 254
-//        colorUI.lightColor = offValue
         sliderColor()
         sendData(data: offValue)
     }
@@ -119,25 +116,7 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     }
     
     func buttonMode(){
-        if mode != nil {
-            let modeValue = mode!
-            
-            switch modeValue {
-            case 1:
-                modeButton.setTitle("Light Off", for: .normal)
-            case 2:
-                modeButton.setTitle("Color mode", for: .normal)
-            case 3:
-                modeButton.setTitle("Yellow mode", for: .normal)
-            case 4:
-                modeButton.setTitle("White mode", for: .normal)
-            default:
-                print("mode")
-            }
-        } else {
-            modeButton.setTitle("ON", for: .normal)
-        }
-        
+        modeButton.setTitle(colorUI.getModeText(), for: .normal)
     }
     
     func sliderColor () {
@@ -148,13 +127,10 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
                 actualColor = UIColor.gray
             } else if mode == 2 {
                 actualColor = colorUI.getColor(color: color)
-                print("gogog")
             } else if mode == 3 {
                 actualColor = UIColor.systemYellow
-                print("haha")
             } else if mode == 4 {
                 actualColor = UIColor.white
-                print("trzeci")
             }
             changeColorSlider.value = Float(color)
             changeColorSlider.thumbTintColor = actualColor
@@ -261,9 +237,6 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
                         //Set Notify is useful to read incoming data async
                         peripheral.setNotifyValue(true, for: characteristic)
                         print("Found Bluno Data Characteristic")
-//                        if colorUI.lightColor == nil {
-//                            sendData(data: 253)
-//                        }
                         sendData(data: 253)
                         
                     }
@@ -298,9 +271,7 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
                     if stringValue.count < 4 {
                         mode = intValue!%10
                     }
-                    
                     print("**\(stringValue)**")
-                    
                     buttonMode()
                     
                 }

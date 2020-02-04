@@ -260,7 +260,7 @@
                                     <constraint firstItem="HtK-38-7Nd" firstAttribute="centerX" secondItem="DEe-9V-wDb" secondAttribute="centerX" constant="-57.5" id="xl6-TF-OXk"/>
                                 </constraints>
                             </view>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="254" minValue="0.0" maxValue="254" translatesAutoresizingMaskIntoConstraints="NO" id="4rB-Gi-M2t">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="252" minValue="0.0" maxValue="252" translatesAutoresizingMaskIntoConstraints="NO" id="4rB-Gi-M2t">
                                 <rect key="frame" x="14" y="521" width="347" height="31"/>
                                 <color key="minimumTrackTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="thumbTintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

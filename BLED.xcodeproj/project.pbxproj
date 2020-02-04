@@ -15,7 +15,6 @@
 		302C633023A16E28009AD840 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 302C632E23A16E28009AD840 /* LaunchScreen.storyboard */; };
 		302C633923A16FD6009AD840 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 302C633823A16FD6009AD840 /* CoreBluetooth.framework */; };
 		302C633D23A17294009AD840 /* ScanTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302C633C23A17294009AD840 /* ScanTableTableViewController.swift */; };
-		30A182E823CBB3E10074C428 /* LightColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A182E723CBB3E10074C428 /* LightColor.swift */; };
 		30A182EA23CBB43A0074C428 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A182E923CBB43A0074C428 /* Colors.swift */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +29,6 @@
 		302C633123A16E28009AD840 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		302C633823A16FD6009AD840 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		302C633C23A17294009AD840 /* ScanTableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanTableTableViewController.swift; sourceTree = "<group>"; };
-		30A182E723CBB3E10074C428 /* LightColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightColor.swift; sourceTree = "<group>"; };
 		30A182E923CBB43A0074C428 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,7 +88,6 @@
 		30A182E423CBB36B0074C428 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				30A182E723CBB3E10074C428 /* LightColor.swift */,
 				30A182E923CBB43A0074C428 /* Colors.swift */,
 			);
 			path = Models;
@@ -196,7 +193,6 @@
 				302C633D23A17294009AD840 /* ScanTableTableViewController.swift in Sources */,
 				302C632423A16E1F009AD840 /* AppDelegate.swift in Sources */,
 				302C632623A16E1F009AD840 /* SceneDelegate.swift in Sources */,
-				30A182E823CBB3E10074C428 /* LightColor.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
