@@ -265,7 +265,6 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
             } else if (characteristic.uuid.uuidString == BLECharacteristic) {
                 //data recieved
                 if(characteristic.value != nil) {
-                    print(characteristic.value)
                     let stringValue = String(data: characteristic.value!, encoding: String.Encoding.utf8)!
                     let intValue = Int(stringValue)
                     if stringValue.count < 4 {

@@ -328,6 +328,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="zbZ-cC-wQO"/>
+                    <connections>
+                        <outlet property="backButton" destination="zbZ-cC-wQO" id="R1Z-R9-XlV"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qpR-UZ-Nw2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -352,4 +355,5 @@
             <point key="canvasLocation" x="-583.20000000000005" y="100.29985007496252"/>
         </scene>
     </scenes>
+    <color key="tintColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

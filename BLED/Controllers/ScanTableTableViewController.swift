@@ -15,10 +15,13 @@ class ScanTableTableViewController: UITableViewController, CBCentralManagerDeleg
     var manager:CBCentralManager? = nil
     var parentView:MainViewController? = nil
 
+    @IBOutlet weak var backButton: UINavigationItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.tableView.backgroundColor = UIColor(red: 64/255, green: 80/255, blue: 100/255, alpha: 1)
+        backButton.backBarButtonItem?.tintColor = UIColor.systemGreen
     }
     
     override func viewDidAppear(_ animated: Bool) {
