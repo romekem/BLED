@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreBluetooth
+import Spring
 
 class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
@@ -19,9 +20,9 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     let BLEService = "DFB0"
     let BLECharacteristic = "DFB1"
     
-    var colorUI: Colors = Colors()
+    private var colorUI: Colors = Colors()
     
-    var mode: Int? {
+    private var mode: Int? {
         didSet {
             if mode != oldValue {
                 sliderColor()
@@ -31,7 +32,9 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     }
     
     @IBOutlet weak var changeColorSlider: UISlider!
-    @IBOutlet weak var modeButton: UIButton!
+    @IBOutlet weak var modeButton: SpringButton!
+    @IBOutlet weak var offButton: SpringButton!
+    @IBOutlet var colorButtons: [SpringButton]!
     
     override func viewDidLoad() {
            super.viewDidLoad()
@@ -43,10 +46,14 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     
     // MARK: - Button Methods
     
-    @IBAction func TurnOffButton(_ sender: UIButton) {
+    @IBAction func offButtonPressed(_ sender: UIButton) {
         let offValue: UInt8 = 254
         sliderColor()
         sendData(data: offValue)
+        if (mainPeripheral == nil) {
+            colorUI.shakeButton(offButton)
+            
+        }
     }
     @IBAction func ColorSelected(_ sender: UIButton) {
         let color = colorUI.colorValue(tagValue: sender.tag)
@@ -54,15 +61,22 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
         colorUI.lightColor = color
         sliderColor()
         sendData(data: color)
-        print(color)
+        
+        colorButtons[sender.tag-1].animation = "pop"
+        colorButtons[sender.tag-1].curve = "linear"
+        colorButtons[sender.tag-1].velocity = 0.4
+        colorButtons[sender.tag-1].animate()
     }
     
-    @IBAction func SendButton(_ sender: UIButton) {
+    @IBAction func modeButtonPressed(_ sender: UIButton) {
         let modeChange: UInt8 = 255
         sendData(data: modeChange)
         sendData(data: 253)
         if colorUI.lightColor != nil {
             sendData(data: colorUI.lightColor!)
+        }
+        if (mainPeripheral == nil) {
+            colorUI.shakeButton(modeButton)
         }
         
     }
@@ -142,7 +156,6 @@ class MainViewController: UIViewController, CBCentralManagerDelegate, CBPeripher
     func sendData(data: UInt8){
         let dataData = Data(repeating: data, count: 1)
         if (mainPeripheral != nil) {
-            print("sending...")
             mainPeripheral?.writeValue(dataData, for: mainCharacteristic!, type: CBCharacteristicWriteType.withoutResponse)
         } else {
             print("haven't discovered device yet")

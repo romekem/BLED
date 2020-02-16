@@ -15,19 +15,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eB5-HP-q6W">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eB5-HP-q6W" customClass="SpringButton" customModule="Spring">
                                 <rect key="frame" x="27" y="71" width="39" height="30"/>
                                 <state key="normal" title="Mode">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="SendButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M5Y-e4-KBD"/>
+                                    <action selector="modeButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M5Y-e4-KBD"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DEe-9V-wDb">
                                 <rect key="frame" x="52.5" y="198.5" width="270" height="270"/>
                                 <subviews>
-                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yUx-40-PTL">
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yUx-40-PTL" customClass="SpringButton" customModule="Spring">
                                         <rect key="frame" x="172.5" y="15.5" width="40" height="40"/>
                                         <color key="backgroundColor" red="0.53725490196078429" green="0.84313725490196079" blue="0.21568627450980393" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
@@ -44,7 +44,7 @@
                                             <action selector="ColorSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XqM-Uh-wSj"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9aV-NP-Poe">
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9aV-NP-Poe" customClass="SpringButton" customModule="Spring">
                                         <rect key="frame" x="115" y="0.0" width="40" height="40"/>
                                         <color key="backgroundColor" red="0.96848052740097046" green="0.87930237138357703" blue="0.088032934033322657" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
@@ -60,7 +60,7 @@
                                             <action selector="ColorSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fif-nI-obH"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JH7-9F-9dP">
+                                    <button opaque="NO" tag="10" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JH7-9F-9dP" customClass="SpringButton" customModule="Spring">
                                         <rect key="frame" x="0.0" y="115" width="40" height="40"/>
                                         <color key="backgroundColor" systemColor="systemRedColor" red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -77,7 +77,7 @@
                                             <action selector="ColorSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gcx-xt-sIp"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ib-u0-Rez">
+                                    <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4ib-u0-Rez" customClass="SpringButton" customModule="Spring">
                                         <rect key="frame" x="115" y="230" width="40" height="40"/>
                                         <color key="backgroundColor" systemColor="systemIndigoColor" red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -94,7 +94,7 @@
                                             <action selector="ColorSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3VB-HU-wqS"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHa-OK-7Uw">
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHa-OK-7Uw" customClass="SpringButton" customModule="Spring">
                                         <rect key="frame" x="230" y="115" width="40" height="40"/>
                                         <color key="backgroundColor" red="0.14604779199207704" green="0.84267407655715942" blue="0.67520762059716477" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
@@ -111,7 +111,7 @@
                                             <action selector="ColorSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0sc-Cr-rC0"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I3J-NZ-LsK">
+                                    <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I3J-NZ-LsK" customClass="SpringButton" customModule="Spring">
                                         <rect key="frame" x="59.5" y="17.5" width="40" height="40"/>
                                         <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -127,7 +127,7 @@
                                             <action selector="ColorSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LDI-FN-9j0"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wea-oq-3cS">
+                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wea-oq-3cS" customClass="SpringButton" customModule="Spring">
                                         <rect key="frame" x="172.5" y="214.5" width="40" height="40"/>
                                         <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -144,7 +144,7 @@
                                             <action selector="ColorSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NeX-4k-oF0"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HtK-38-7Nd">
+                                    <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HtK-38-7Nd" customClass="SpringButton" customModule="Spring">
                                         <rect key="frame" x="57.5" y="214.5" width="40" height="40"/>
                                         <color key="backgroundColor" systemColor="systemPurpleColor" red="0.68627450980000004" green="0.32156862749999998" blue="0.87058823529999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -161,7 +161,7 @@
                                             <action selector="ColorSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bSt-gB-TLT"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JNy-8c-0mH">
+                                    <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JNy-8c-0mH" customClass="SpringButton" customModule="Spring">
                                         <rect key="frame" x="15.5" y="172.5" width="40" height="40"/>
                                         <color key="backgroundColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -178,7 +178,7 @@
                                             <action selector="ColorSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CB6-fD-Ccg"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9R-Kh-gWD">
+                                    <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m9R-Kh-gWD" customClass="SpringButton" customModule="Spring">
                                         <rect key="frame" x="15.5" y="57.5" width="40" height="40"/>
                                         <color key="backgroundColor" red="0.91980725526809692" green="0.39965457947285282" blue="0.079577998050617937" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
@@ -195,7 +195,7 @@
                                             <action selector="ColorSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="O9d-JO-AdE"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u66-O6-vtd">
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u66-O6-vtd" customClass="SpringButton" customModule="Spring">
                                         <rect key="frame" x="214.5" y="172.5" width="40" height="40"/>
                                         <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -212,7 +212,7 @@
                                             <action selector="ColorSelected:" destination="BYZ-38-t0r" eventType="touchUpInside" id="mFC-pU-lFy"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkA-sw-d20">
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kkA-sw-d20" customClass="SpringButton" customModule="Spring">
                                         <rect key="frame" x="214.5" y="57.5" width="40" height="40"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -268,13 +268,13 @@
                                     <action selector="ColorSlider:" destination="BYZ-38-t0r" eventType="valueChanged" id="tGC-z9-9Zj"/>
                                 </connections>
                             </slider>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xry-xh-dtt">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xry-xh-dtt" customClass="SpringButton" customModule="Spring">
                                 <rect key="frame" x="318" y="71" width="30" height="30"/>
                                 <state key="normal" title="Off">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="TurnOffButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LPq-2p-ifV"/>
+                                    <action selector="offButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="LPq-2p-ifV"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -296,6 +296,19 @@
                     <connections>
                         <outlet property="changeColorSlider" destination="4rB-Gi-M2t" id="ZSC-gN-Rle"/>
                         <outlet property="modeButton" destination="eB5-HP-q6W" id="ey7-pC-o1k"/>
+                        <outlet property="offButton" destination="Xry-xh-dtt" id="22E-A0-W4U"/>
+                        <outletCollection property="colorButtons" destination="9aV-NP-Poe" collectionClass="NSMutableArray" id="a2v-9g-gzr"/>
+                        <outletCollection property="colorButtons" destination="yUx-40-PTL" collectionClass="NSMutableArray" id="sMa-gB-rFq"/>
+                        <outletCollection property="colorButtons" destination="kkA-sw-d20" collectionClass="NSMutableArray" id="gDr-Wl-NaK"/>
+                        <outletCollection property="colorButtons" destination="EHa-OK-7Uw" collectionClass="NSMutableArray" id="AXM-LE-EJa"/>
+                        <outletCollection property="colorButtons" destination="u66-O6-vtd" collectionClass="NSMutableArray" id="hYX-Yb-idd"/>
+                        <outletCollection property="colorButtons" destination="wea-oq-3cS" collectionClass="NSMutableArray" id="eDD-dA-S1w"/>
+                        <outletCollection property="colorButtons" destination="4ib-u0-Rez" collectionClass="NSMutableArray" id="Tdo-6I-0Mv"/>
+                        <outletCollection property="colorButtons" destination="HtK-38-7Nd" collectionClass="NSMutableArray" id="eQn-lY-00P"/>
+                        <outletCollection property="colorButtons" destination="JNy-8c-0mH" collectionClass="NSMutableArray" id="N1E-Ug-jio"/>
+                        <outletCollection property="colorButtons" destination="JH7-9F-9dP" collectionClass="NSMutableArray" id="pjZ-YX-3uf"/>
+                        <outletCollection property="colorButtons" destination="m9R-Kh-gWD" collectionClass="NSMutableArray" id="4EP-mJ-3PI"/>
+                        <outletCollection property="colorButtons" destination="I3J-NZ-LsK" collectionClass="NSMutableArray" id="TbY-VP-QP6"/>
                         <segue destination="TSf-NA-Ej9" kind="show" identifier="scan-segue" id="3Mq-5K-MBJ"/>
                     </connections>
                 </viewController>

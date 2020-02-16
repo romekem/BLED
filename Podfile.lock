@@ -1,0 +1,21 @@
+PODS:
+  - Spring (1.0.6)
+
+DEPENDENCIES:
+  - Spring (from `https://github.com/MussaCharles/Spring.git`)
+
+EXTERNAL SOURCES:
+  Spring:
+    :git: https://github.com/MussaCharles/Spring.git
+
+CHECKOUT OPTIONS:
+  Spring:
+    :commit: b96701ce34d4854e53682822b16fac4312b25e19
+    :git: https://github.com/MussaCharles/Spring.git
+
+SPEC CHECKSUMS:
+  Spring: 3d113f14575ef79aec9c5f906dfa4f5001c03254
+
+PODFILE CHECKSUM: 91c60922c9b292526d1a34e82be5cbfee387fb5b
+
+COCOAPODS: 1.8.4
